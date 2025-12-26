@@ -20,8 +20,6 @@ data "aws_subnets" "default" {
 }
 
 
-
-
 # Security Group
 resource "aws_security_group" "strapi_sg" {
   name   = "strapi-docker-sg1"
@@ -43,7 +41,7 @@ resource "aws_security_group" "strapi_sg" {
 }
 
 resource "aws_cloudwatch_log_group" "strapi" {
-  name                     = "/ecs/docker-strapi-con"
+  name                     = "/ecs/logs-store"
   retention_in_days = 7
 }
 
