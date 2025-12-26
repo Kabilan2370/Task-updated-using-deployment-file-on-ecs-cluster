@@ -26,6 +26,9 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ env.AWS_REGION }}
 
+    - name: Install jq
+      run: sudo apt-get update && sudo apt-get install -y jq
+
     - name: Login to ECR
       uses: aws-actions/amazon-ecr-login@v2
 
@@ -40,7 +43,6 @@ jobs:
       run: |
         sed "s|<IMAGE_URI>|$IMAGE_URI|g" taskdef.json > taskdef-rendered.json
 
-    #
     - name: Register ECS Task Definition
       run: |
         TASK_DEF_ARN=$(aws ecs register-task-definition \
@@ -51,20 +53,19 @@ jobs:
         echo "TASK_DEF_ARN=$TASK_DEF_ARN" >> $GITHUB_ENV
         echo "Registered task definition: $TASK_DEF_ARN"
 
-    # 🔴 appspec MUST be generated dynamically
-    - name: Generate AppSpec
+    - name: Generate AppSpec (FIXED)
       run: |
-        cat > appspec.yaml <<EOF
-        version: 1
-        Resources:
-          - TargetService:
-              Type: AWS::ECS::Service
-              Properties:
-                TaskDefinition: ${TASK_DEF_ARN}
-                LoadBalancerInfo:
-                  ContainerName: ${CONTAINER_NAME}
-                  ContainerPort: ${CONTAINER_PORT}
-        EOF
+        cat <<EOF > appspec.yaml
+version: 1
+Resources:
+  - TargetService:
+      Type: AWS::ECS::Service
+      Properties:
+        TaskDefinition: ${TASK_DEF_ARN}
+        LoadBalancerInfo:
+          ContainerName: ${CONTAINER_NAME}
+          ContainerPort: ${CONTAINER_PORT}
+EOF
 
     - name: Create CodeDeploy deployment
       run: |
