@@ -39,7 +39,7 @@
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
-          "awslogs-group": "/ecs/docker-strapi-con",
+          "awslogs-group": "/ecs/logs-store",
           "awslogs-region": "ap-south-1",
           "awslogs-stream-prefix": "ecs"
         }
