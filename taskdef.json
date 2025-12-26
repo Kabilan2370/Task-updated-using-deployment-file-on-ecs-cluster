@@ -17,6 +17,19 @@
           "protocol": "tcp"
         }
       ],
+      "environment": [
+        { "name": "HOST", "value": "0.0.0.0" },
+        { "name": "PORT", "value": "1337" },
+
+        { "name": "DATABASE_CLIENT", "value": "mysql" },
+        { "name": "DATABASE_HOST", "value": "YOUR_RDS_ENDPOINT" },
+        { "name": "DATABASE_PORT", "value": "3306" },
+        { "name": "DATABASE_NAME", "value": "strapi" },
+        { "name": "DATABASE_USERNAME", "value": "strapi" },
+        { "name": "DATABASE_PASSWORD", "value": "REPLACE_ME" },
+
+        { "name": "DATABASE_SSL", "value": "false" }
+      ],
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
@@ -25,7 +38,6 @@
           "awslogs-stream-prefix": "ecs"
         }
       }
-      
     }
   ]
 }
