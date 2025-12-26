@@ -7,9 +7,9 @@ name: Deploy Strapi to ECS
 env:
   AWS_REGION: ap-south-1
   ECR_REPO: docker-strapi-ecr
-  ECS_CLUSTER: ecs-cluster-strapi-dsc
-  CODEDEPLOY_APP: application-codedeploy
-  CODEDEPLOY_DG: deploy-group-app
+  ECS_CLUSTER: ecs-cluster-aws
+  CODEDEPLOY_APP: code-application-cd
+  CODEDEPLOY_DG: code-deploy-gn
   CONTAINER_NAME: strapi-web
   CONTAINER_PORT: 1337
 
