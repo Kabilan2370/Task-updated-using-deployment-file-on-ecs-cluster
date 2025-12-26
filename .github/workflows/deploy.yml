@@ -53,8 +53,8 @@ jobs:
         echo "TASK_DEF_ARN=$TASK_DEF_ARN" >> $GITHUB_ENV
         echo "Registered task definition: $TASK_DEF_ARN"
 
-        - name: Generate AppSpec
-        run: |
+    - name: Generate AppSpec
+      run: |
           cat <<EOF > appspec.yaml
           version: 1
           Resources:
