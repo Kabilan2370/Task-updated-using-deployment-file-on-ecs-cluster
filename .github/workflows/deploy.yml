@@ -53,19 +53,20 @@ jobs:
         echo "TASK_DEF_ARN=$TASK_DEF_ARN" >> $GITHUB_ENV
         echo "Registered task definition: $TASK_DEF_ARN"
 
-    - name: Generate AppSpec (FIXED)
-      run: |
-        cat <<EOF > appspec.yaml
-version: 1
-Resources:
-  - TargetService:
-      Type: AWS::ECS::Service
-      Properties:
-        TaskDefinition: ${TASK_DEF_ARN}
-        LoadBalancerInfo:
-          ContainerName: ${CONTAINER_NAME}
-          ContainerPort: ${CONTAINER_PORT}
-EOF
+        - name: Generate AppSpec
+        run: |
+          cat <<EOF > appspec.yaml
+          version: 1
+          Resources:
+            - TargetService:
+                Type: AWS::ECS::Service
+                Properties:
+                  TaskDefinition: ${TASK_DEF_ARN}
+                  LoadBalancerInfo:
+                    ContainerName: ${CONTAINER_NAME}
+                    ContainerPort: ${CONTAINER_PORT}
+          EOF
+
 
     - name: Create CodeDeploy deployment
       run: |
