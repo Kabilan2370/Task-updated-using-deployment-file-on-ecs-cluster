@@ -1,6 +1,6 @@
 # security group for alb
 resource "aws_security_group" "alb" {
-  name        = "docker-strapi-alb-sg2"
+  name        = "access-sg2"
   description = "Allow HTTP inbound"
   vpc_id      = local.default_vpc_id
 
@@ -28,7 +28,7 @@ resource "aws_security_group" "alb" {
 
 # application load balancer
 resource "aws_lb" "strapi" {
-  name               = "kabilan-app-lb"
+  name               = "application-load-kabil"
   load_balancer_type = "application"
   internal           = false
   security_groups    = [aws_security_group.alb.id]
@@ -37,7 +37,7 @@ resource "aws_lb" "strapi" {
 
 # blue target group for application load balancer
 resource "aws_lb_target_group" "blue_strapi" {
-  name        = "blu-target-one"
+  name        = "fir-blue-target"
   port        = 1337
   protocol    = "HTTP"
   target_type = "ip"
@@ -55,7 +55,7 @@ resource "aws_lb_target_group" "blue_strapi" {
 
 # green target group for application load balancer
 resource "aws_lb_target_group" "green_strapi" {
-  name        = "green-target-two"
+  name        = "sec-green-target"
   port        = 1337
   protocol    = "HTTP"
   target_type = "ip"
