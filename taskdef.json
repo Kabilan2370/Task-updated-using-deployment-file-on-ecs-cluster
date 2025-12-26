@@ -1,0 +1,31 @@
+{
+  "family": "docker-strapi-family",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "512",
+  "memory": "1024",
+  "executionRoleArn": "arn:aws:iam::301782007642:role/docker-ecsTaskExecutionRole-one",
+  "taskRoleArn": "arn:aws:iam::301782007642:role/ecsTaskRole-strapi",
+  "containerDefinitions": [
+    {
+      "name": "strapi-web",
+      "image": "<IMAGE_URI>",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 1337,
+          "protocol": "tcp"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/docker-strapi-con",
+          "awslogs-region": "ap-south-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      }
+      
+    }
+  ]
+}
