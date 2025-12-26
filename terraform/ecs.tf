@@ -19,7 +19,7 @@ resource "aws_iam_role_policy_attachment" "ecs_exec_policy" {
 
 # aws cluster
 resource "aws_ecs_cluster" "cluster" {
-  name = "ecs-cluster-strapi-dsc"
+  name = "ecs-cluster-aws"
  
 }
 
@@ -47,7 +47,7 @@ resource "aws_ecs_task_definition" "strapi" {
     logConfiguration = {
       logDriver = "awslogs"
       options = {
-        "awslogs-group"         	= "/ecs/docker-strapi-con"
+        "awslogs-group"         	= "/ecs/logs-store"
         "awslogs-region"        	= "ap-south-1"
         "awslogs-stream-prefix" 	= "ecs"
       }
@@ -81,7 +81,7 @@ resource "aws_ecs_task_definition" "strapi" {
 }
 
 resource "aws_ecs_service" "service" {
-  name            	= "ecs-service-docker"
+  name            	= "ecs-service-aws"
   cluster         	= aws_ecs_cluster.cluster.id
   task_definition 	= aws_ecs_task_definition.strapi.arn
   desired_count   	= 1
