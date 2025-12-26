@@ -23,14 +23,14 @@ resource "aws_iam_role_policy_attachment" "codedeploy_policy" {
 
 # code deploy application
 resource "aws_codedeploy_app" "ecs_app" {
-  name = "application-codedeploy"
+  name = "code-application-cd"
   compute_platform = "ECS"
 }
 
 # code deployment group
 resource "aws_codedeploy_deployment_group" "ecs_deployment_group" {
   app_name              = aws_codedeploy_app.ecs_app.name
-  deployment_group_name = "deploy-group-app"
+  deployment_group_name = "code-deploy-gn"
   service_role_arn      = aws_iam_role.codedeploy_role.arn
 
   deployment_config_name = "CodeDeployDefault.ECSCanary10Percent5Minutes"
