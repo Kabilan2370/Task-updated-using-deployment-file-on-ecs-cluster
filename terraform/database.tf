@@ -20,7 +20,7 @@ resource "aws_security_group" "strapi_sg2" {
 }
 
 resource "aws_db_instance" "strapi" {
-  identifier              = "docker-strapi-postgres"
+  identifier              = "postgres-database-iden"
   engine                  = "postgres"
   engine_version          = "15"
   instance_class          = "db.t3.small"
